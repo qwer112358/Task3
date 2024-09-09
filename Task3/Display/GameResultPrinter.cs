@@ -1,4 +1,6 @@
-﻿public class GameResultPrinter
+﻿using System;
+
+public sealed class GameResultPrinter
 {
     public void PrintResult(GameResult result)
     {

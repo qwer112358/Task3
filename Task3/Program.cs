@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
-class Program
+sealed class Program
 {
     static void Main(string[] args)
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Immutable;
 
-public class Game
+public sealed class Game
 {
     private readonly ImmutableList<string> _moves;
     private readonly MoveGenerator _moveGenerator;

@@ -1,14 +1,12 @@
 ﻿using System.Collections.Immutable;
 
-public class MoveDisplay
+public sealed class MoveDisplay
 {
     private readonly ImmutableList<string> _moves;
-    private readonly HelpTable _helpTable;
 
     public MoveDisplay(ImmutableList<string> moves)
     {
         _moves = moves;
-        _helpTable = new HelpTable(_moves);
     }
 
     public void ShowAvailableMoves()
@@ -27,5 +25,9 @@ public class MoveDisplay
     public void DisplayInvalidInputMessage() =>
         Console.WriteLine("Invalid input. Try again.");
 
-    public void DisplayHelp() => _helpTable.PrintHelpTable();
+    public void DisplayHelp()
+    {
+        var helpTable = new HelpTable(_moves);
+        helpTable.PrintHelpTable();
+    }
 }

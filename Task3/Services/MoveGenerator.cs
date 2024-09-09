@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 
-public class MoveGenerator
+public sealed class MoveGenerator
 {
     private readonly ImmutableList<string> _moves;
     private readonly Random _random;

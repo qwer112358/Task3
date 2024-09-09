@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-public class HmacGenerator
+public sealed class HmacGenerator
 {
     private static readonly HmacGenerator _instance = new HmacGenerator();
     private const int KeyLengthInBytes = 32; // 256 bits = 32 bytes

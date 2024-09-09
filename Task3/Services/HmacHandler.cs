@@ -1,4 +1,6 @@
-﻿public class HmacHandler
+﻿using System;
+
+public sealed class HmacHandler
 {
     private readonly HmacGenerator _hmacGenerator;
 
