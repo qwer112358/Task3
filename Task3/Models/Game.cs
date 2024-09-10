@@ -17,12 +17,14 @@ public sealed class Game
         _moveGenerator = new MoveGenerator(moves);
         _hmacHandler = new HmacHandler();
         _moveDisplay = new MoveDisplay(moves);
-        _gameRules = new GameRules(moves);
+        _gameRules = GameRules.Instance;
+        _gameRules.SetMoves(moves);
         _gameResultPrinter = new GameResultPrinter();
     }
 
     public void Start()
     {
+        _isGameRunning = true;
         InitializeGame();
 
         while (_isGameRunning)
@@ -36,10 +38,10 @@ public sealed class Game
 
     private void InitializeGame()
     {
+        _hmacHandler.GenerateNewKey();
         _moveGenerator.GenerateComputerMove();
         _hmacHandler.DisplayHmac(_moveGenerator.ComputerMove);
         _moveDisplay.ShowAvailableMoves();
-        _isGameRunning = true;
     }
 
     private string? ReadInput()
@@ -92,6 +94,10 @@ public sealed class Game
 
         PrintRoundResults(playerMove, computerMove, result);
         PrintHmacInfo();
+
+        Console.WriteLine("\n" + new string('-', 40));
+        Console.WriteLine("Next round:");
+        InitializeGame();
     }
 
     private void PrintRoundResults(string playerMove, string computerMove, GameResult result)

@@ -3,22 +3,24 @@ using System.Text;
 
 public sealed class HmacGenerator
 {
-    private static readonly HmacGenerator _instance = new HmacGenerator();
-    private const int KeyLengthInBytes = 32; // 256 bits = 32 bytes
     private byte[] _key;
 
-    private HmacGenerator()
+    public HmacGenerator()
     {
-        _key = GenerateKey(KeyLengthInBytes);
+        _key = GenerateKey();
     }
 
-    public static HmacGenerator Instance => _instance;
-
-    private byte[] GenerateKey(int length)
+    public void GenerateNewKey()
     {
+        _key = GenerateKey(); 
+    }
+
+    private byte[] GenerateKey()
+    {
+        const int KeyLengthInBytes = 32; // 256 bits = 32 bytes
         using (var rng = RandomNumberGenerator.Create())
         {
-            var key = new byte[length];
+            var key = new byte[KeyLengthInBytes];
             rng.GetBytes(key);
             return key;
         }
@@ -36,4 +38,3 @@ public sealed class HmacGenerator
 
     public string GetKey() => BitConverter.ToString(_key).Replace("-", "");
 }
-

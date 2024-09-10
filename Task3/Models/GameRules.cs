@@ -4,9 +4,18 @@ using System.Collections.Immutable;
 
 public sealed class GameRules
 {
+    private static readonly GameRules _instance = new GameRules(ImmutableList<string>.Empty);
+
     private ImmutableList<string> _moves;
-    
-    public GameRules(ImmutableList<string> moves)
+
+    private GameRules(ImmutableList<string> moves)
+    {
+        _moves = moves;
+    }
+
+    public static GameRules Instance => _instance;
+
+    public void SetMoves(ImmutableList<string> moves)
     {
         _moves = moves;
     }

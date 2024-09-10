@@ -6,9 +6,9 @@ using Spectre.Console;
 public sealed class HelpTable
 {
     private readonly ImmutableList<string> _moves;
-    private readonly string _headerLabel = "v PC/User >";
-    private readonly string _headerColor = "cyan";
-    private readonly string _movesColor = "cyan";
+    private readonly string _headerLabel;
+    private readonly string _headerColor;
+    private readonly string _movesColor;
     private readonly Dictionary<GameResult, (string Color, string Label)> _resultsStyle;
     private Table _table;
 
@@ -50,7 +50,7 @@ public sealed class HelpTable
 
     private string GetFormattedResult(int row, int column)
     {
-        GameResult result = new GameRules(_moves).GetGameResult(column, row);
+        GameResult result = GameRules.Instance.GetGameResult(column, row);
         var (color, label) = _resultsStyle[result];
         return CreateColoredText(label, color);
     }

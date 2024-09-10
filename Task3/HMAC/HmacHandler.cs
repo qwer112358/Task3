@@ -8,7 +8,12 @@ public sealed class HmacHandler
 
     public HmacHandler()
     {
-        _hmacGenerator = HmacGenerator.Instance;
+        _hmacGenerator = new HmacGenerator();
+    }
+
+    public void GenerateNewKey()
+    {
+        _hmacGenerator.GenerateNewKey();
     }
 
     public void DisplayHmac(string message)
@@ -21,6 +26,6 @@ public sealed class HmacHandler
     {
         string encodedMessage = Uri.EscapeDataString(message);
         string encodedKey = Uri.EscapeDataString(Key);
-        return $"https://cryptii.com/pipes/hmac?key={encodedKey}&data={encodedMessage}&algorithm=HMACSHA256";
+        return $"https://cryptii.com/pipes/hmac?key={encodedKey}&message={encodedMessage}&algorithm=HMACSHA256";
     }
 }
