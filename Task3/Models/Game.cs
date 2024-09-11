@@ -27,7 +27,6 @@ public sealed class Game
     {
         _isGameRunning = true;
         InitializeGame();
-
         while (_isGameRunning)
         {
             var input = ReadInput();
@@ -93,10 +92,8 @@ public sealed class Game
         var playerMove = _moves[playerMoveIndex];
         var computerMove = _moveGenerator.ComputerMove;
         var result = _gameRules.GetGameResult(playerMoveIndex, _moveGenerator.ComputerMoveIndex);
-
         PrintRoundResults(playerMove, computerMove, result);
         PrintHmacInfo();
-
         Console.WriteLine("\n" + new string('-', 80));
         Console.WriteLine($"Round {++_currentRound}:");
         InitializeGame();

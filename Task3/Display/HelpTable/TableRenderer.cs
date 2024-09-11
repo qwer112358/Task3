@@ -1,7 +1,6 @@
 ﻿using Spectre.Console;
 using System.Collections.Immutable;
 
-
 public sealed class TableRenderer
 {
     private readonly ImmutableList<string> _moves;

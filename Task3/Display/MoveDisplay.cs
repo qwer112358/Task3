@@ -12,12 +12,10 @@ public sealed class MoveDisplay
     public void ShowAvailableMoves()
     {
         Console.WriteLine("Available moves:");
-
         for (int index = 0; index < _moves.Count; index++)
         {
             Console.WriteLine($"{index + 1} - {_moves[index]}");
         }
-
         Console.WriteLine("0 - Exit");
         Console.WriteLine("? - Help");
     }

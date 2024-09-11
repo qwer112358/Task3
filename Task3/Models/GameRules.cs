@@ -3,7 +3,6 @@
 public sealed class GameRules
 {
     private static readonly GameRules _instance = new GameRules(ImmutableList<string>.Empty);
-
     private ImmutableList<string> _moves;
 
     private GameRules(ImmutableList<string> moves)
