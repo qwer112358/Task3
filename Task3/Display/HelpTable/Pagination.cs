@@ -1,12 +1,14 @@
 ﻿public sealed class Pagination
 {
-    private int _currentRowPage;
-    private int _currentColumnPage;
     private readonly int _totalRows;
     private readonly int _totalColumns;
 
     public int RowsPerPage { get; init; }
+    public int CurrentRowPage { get; private set; }
+    public int CurrentColumnPage { get; private set; }
     public int ColumnsPerPage { get; init; }
+    public int TotalRowPages { get; init; }
+    public int TotalColumnPages { get; init; }
 
     public Pagination(int rowsPerPage, int columnsPerPage, int totalRows, int totalColumns)
     {
@@ -14,10 +16,13 @@
         ColumnsPerPage = columnsPerPage;
         _totalRows = totalRows;
         _totalColumns = totalColumns;
-        _currentRowPage = 0;
-        _currentColumnPage = 0;
+        CurrentRowPage = 0;
+        CurrentColumnPage = 0;
+        TotalRowPages = IntegerCeiling(totalRows, rowsPerPage);
+        TotalColumnPages = IntegerCeiling(totalColumns, columnsPerPage);
     }
 
+    private int IntegerCeiling(int x, int y) => (x + y - 1) / y;
     public bool HandleInput(ConsoleKey key)
     {
         return key switch
@@ -31,33 +36,33 @@
         };
     }
 
-    public (int RowPage, int ColumnPage) GetCurrentPages() => (_currentRowPage, _currentColumnPage);
+    public (int RowPage, int ColumnPage) GetCurrentPages() => (CurrentRowPage, CurrentColumnPage);
 
     private bool MoveUp()
     {
-        if (_currentRowPage > 0)
-            _currentRowPage--;
+        if (CurrentRowPage > 0)
+            CurrentRowPage--;
         return true;
     }
 
     private bool MoveDown()
     {
-        if (_currentRowPage < (_totalRows - 1) / RowsPerPage)
-            _currentRowPage++;
+        if (CurrentRowPage < (_totalRows - 1) / RowsPerPage)
+            CurrentRowPage++;
         return true;
     }
 
     private bool MoveLeft()
     {
-        if (_currentColumnPage > 0)
-            _currentColumnPage--;
+        if (CurrentColumnPage > 0)
+            CurrentColumnPage--;
         return true;
     }
 
     private bool MoveRight()
     {
-        if (_currentColumnPage < (_totalColumns - 1) / ColumnsPerPage)
-            _currentColumnPage++;
+        if (CurrentColumnPage < (_totalColumns - 1) / ColumnsPerPage)
+            CurrentColumnPage++;
         return true;
     }
 }

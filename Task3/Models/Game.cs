@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 
 public sealed class Game
 {
@@ -10,6 +9,7 @@ public sealed class Game
     private readonly GameRules _gameRules;
     private readonly GameResultPrinter _gameResultPrinter;
     private bool _isGameRunning;
+    private int _currentRound;
 
     public Game(ImmutableList<string> moves)
     {
@@ -20,6 +20,7 @@ public sealed class Game
         _gameRules = GameRules.Instance;
         _gameRules.SetMoves(moves);
         _gameResultPrinter = new GameResultPrinter();
+        _currentRound = 1;
     }
 
     public void Start()
@@ -68,6 +69,7 @@ public sealed class Game
     private bool DisplayHelp()
     {
         _moveDisplay.DisplayHelp();
+        InitializeGame();
         return true;
     }
 
@@ -95,8 +97,8 @@ public sealed class Game
         PrintRoundResults(playerMove, computerMove, result);
         PrintHmacInfo();
 
-        Console.WriteLine("\n" + new string('-', 40));
-        Console.WriteLine("Next round:");
+        Console.WriteLine("\n" + new string('-', 80));
+        Console.WriteLine($"Round {++_currentRound}:");
         InitializeGame();
     }
 
